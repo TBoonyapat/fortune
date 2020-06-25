@@ -14,7 +14,7 @@ const   express = require("express"),
 const port=process.env.PORT || 3000;
 var mongo_uri = "mongodb+srv://admin:boonyapat_17@fortune-qauvw.gcp.mongodb.net/MYDATA?retryWrites=true&w=majority";
 mongoose.Promise = global.Promise;
-mongoose.connect(mongo_uri, { useNewUrlParser: true }).then(
+mongoose.connect(mongo_uri, { useNewUrlParser: true ,useUnifiedTopology: true }).then(
   () => {
     console.log("[success] task 2 : connected to the database ");
   },
