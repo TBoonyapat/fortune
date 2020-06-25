@@ -1,0 +1,239 @@
+
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+<div class="topnav" id="myTopnav">
+  <a class="navbar-brand mu-logo" href="/fortune"><span>TEETEE FORTUNE</span></a>
+  <a  href="/fortune">หน้าหลัก</a>
+  <a href="/fortune/today">ดูดวงรายวัน</a>
+  <a href="/fortune/rasee">ดูดวงราศี</a>
+  <a class="active" href="/fortune/birthday">ดูดวงวันเกิด</a>
+  <div class="dropdown">
+    <button class="dropbtn">ดูดวงไพ่ยิปซี 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+     		<a href="/fortune/yipseeday">ดูดวงไพ่ยิปซีรายวัน</a>
+		<a href="/fortune/yipseelove">ดูดวงไพ่ยิปซีความรัก</a>
+		<a href="/fortune/yipseemonth">ดูดวงไพ่ยิปซีรายเดือน</a>
+    </div>
+
+  </div> 
+  <a href="/fortune/lottery">ทำนายฝัน</a>
+
+  <% if(!currentUser) { %>
+ <a style="float:right;"  href="/login" method = 'POST' tabindex="-1">เข้าสู่ระบบ</a>
+    <a  style="float:right;" href="/signup" method = 'POST' tabindex="-1">สมัครสมาชิก</a>
+    <% } else { %>
+      <a   style="float:right;" href="/logout" tabindex="-1">ออกจากระบบ</a>
+    <a  style="float:right;" href="/fortune/<%= currentUser._id %>/Profile" tabindex="-1">โปรไฟล์</a>
+     
+        <% } %>  
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+<div class='container' >
+  <% if (error && error.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+  <% } %>
+</div>
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  </script>
+
+
+
+
+<!-- <h1><%= Birthdaydate._id %></h1>
+<form action = '/fortune/birthday/<%= Birthdaydate._id %>?_method=PUT' method="POST">  -->
+  <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w780">
+        <div class="card card-2">
+            <div class="card-heading"></div>
+            <div class="card-body">
+<form action = '/fortune/birthday' method="POST">
+	<p></br></p>
+  <br>          
+ 
+  <label for="cars">วัน:</label>
+  <select id="day" name="day1">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3" >3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7" >7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11" >11</option>
+      <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15" >15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19" >19</option>
+    <option value="20">20</option>
+    <option value="21">21</option>
+    <option value="22">22</option>
+     <option value="23">23</option>
+    <option value="24">24</option>
+    <option value="25">25</option>
+    <option value="26">26</option>
+    <option value="27" >27</option>
+    <option value="28">28</option>
+    <option value="29">29</option>
+    <option value="30">30</option>
+    <option value="31">31</option>
+  </select>
+<br>
+<br>
+  <label for="cars">เดือน:</label>
+  <select name='month1' id="month">
+    <option value="มกราคม">มกราคม</option>
+    <option value="กุมภาพันธ์">กุมภาพันธ์</option>
+    <option value="มีนาคม" >มีนาคม</option>
+    <option value="เมษายน">เมษายน</option>
+    <option value="พฤษภาคม">พฤษภาคม</option>
+    <option value="มิถุนายน">มิถุนายน</option>
+    <option value="กรกฎาคม" >กรกฎาคม</option>
+    <option value="สิงหาคม">สิงหาคม</option>
+    <option value="กันยายน">กันยายน/option>
+    <option value="ตุลาคม">ตุลาคม</option>
+    <option value="1พฤศจิกายน" >พฤศจิกายน</option>
+      <option value="ธันวาคม">ธันวาคม</option>
+    </select>
+    <br>
+    <br>
+    <label for="cars">ปี:</label>
+    <select name='year1' id="year">
+    <option value="2463">2463</option>
+    <option value="2464">2464</option>
+    <option value="2465" >2465</option>
+    <option value="2466">2466</option>
+    <option value="2467">2467</option>
+    <option value="2468">2468</option>
+    <option value="2469" >2469</option>
+    <option value="2470">2470</option>
+    <option value="2471">2471</option>
+    <option value="2472">2472</option>
+    <option value="2473" >2473</option>
+    <option value="2474">2474</option>
+    <option value="2475">2475</option>
+    <option value="2476">2476</option>
+    <option value="2477" >2477</option>
+    <option value="2479">2479</option>
+    <option value="2480">2480</option>
+    <option value="2481">2481</option>
+    <option value="2482" >2482</option>
+    <option value="2483">2483</option>
+    <option value="2484">2484</option>
+    <option value="2485">2485</option>
+     <option value="2486">2486</option>
+    <option value="2487">2487</option>
+    <option value="2488">2488</option>
+    <option value="2489">2489</option>
+    <option value="2490" >2490</option>
+    <option value="2491">2491</option>
+    <option value="2492">2492</option>
+    <option value="2493">2493</option>
+    <option value="2494">2494</option>
+    <option value="2495">2495</option>
+    <option value="2496">2496</option>
+    <option value="2497">2497</option>
+    <option value="2498">2498</option>
+    <option value="2499">2499</option>
+    <option value="2500">2500</option>
+    <option value="2501">2501</option>
+    <option value="2502">2502</option>
+    <option value="2503">2503</option>
+    <option value="2504">2504</option>
+    <option value="2505">2505</option>
+    <option value="2506">2506</option>
+    <option value="2507">2507</option>
+    <option value="2508">2508</option>
+    <option value="2509">2509</option>
+    <option value="2510">2510</option>
+    <option value="2511">2511</option>
+    <option value="2512">2512</option>
+    <option value="2513">2513</option>
+    <option value="2514">2514</option>
+    <option value="2515">2515</option>
+    <option value="2516">2516</option>
+    <option value="2517">2517</option>
+    <option value="2518">2518</option>
+    <option value="2517">2517</option>
+    <option value="2518">2518</option>
+    <option value="2519">2519</option>
+    <option value="2520">2520</option>
+    <option value="2521">2521</option>
+    <option value="2522">2522</option>
+    <option value="2523">2523</option>
+    <option value="2524">2524</option>
+    <option value="2525">2525</option>
+    <option value="2526">2526</option>
+    <option value="2527">2527</option>
+    <option value="2528">2528</option>
+    <option value="2529">2529</option>
+    <option value="2530">2530</option>
+    <option value="2531">2531</option>
+    <option value="2532">2532</option>
+    <option value="2533">2533</option>
+    <option value="2534">2534</option>
+    <option value="2535">2535</option>
+    <option value="2536">2536</option>
+    <option value="2537">2537</option>
+    <option value="2538">2538</option>
+    <option value="2539">2539</option>
+    <option value="2540">2540</option>
+    <option value="2541">2541</option>
+    <option value="2542">2542</option>
+    <option value="2543">2543</option>
+    <option value="2544">2544</option>
+    <option value="2545">2545</option>
+    <option value="2546">2546</option>
+    <option value="2547">2547</option>
+    <option value="2548">2548</option>
+    <option value="2549">2549</option>
+    <option value="2550">2550</option>
+    <option value="2551">2551</option>
+    <option value="2552">2552</option>
+    <option value="2553">2553</option>
+    <option value="2554">2554</option>
+    <option value="2555">2555</option>
+    <option value="2556">2556</option>
+    <option value="2557">2557</option>
+    <option value="2558">2558</option>
+    <option value="2559">2559</option>
+    <option value="2560">2560</option>
+    <option value="2561">2561</option>
+    <option value="2562">2562</option>
+    <option value="2563">2563</option>
+  </select> 
+	
+ 
+                        
+						
+	<button  id="animated" onclick="zodiac()" class="btn btn--pill btn--green" type="submit">ดูคำทำนาย</button>
+    </div>			                    
+</form> 
+
+</div>
+</div>
+
+</div>
+
+
+
+<%- include("../partials/footer") %>

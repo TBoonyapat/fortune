@@ -1,0 +1,209 @@
+<%- include("../partials/header") %>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+<div class="topnav" id="myTopnav">
+  <a class="navbar-brand mu-logo" href="/fortune"><span>TEETEE FORTUNE</span></a>
+  <a  href="/fortune">หน้าหลัก</a>
+  <a href="/fortune/today">ดูดวงรายวัน</a>
+  <a href="/fortune/rasee">ดูดวงราศี</a>
+  <a href="/fortune/birthday">ดูดวงวันเกิด</a>
+  <a href="/fortune/yipseeday">ดูดวงไพ่ยิปซีรายวัน</a>
+  <a   href="/fortune/yipseelove">ดูดวงไพ่ยิปซีความรัก</a>
+  <a class="active"  href="/fortune/yipseemonth">ดูดวงไพ่ยิปซีรายเดือน</a>
+  
+
+  
+  <a href="/fortune/lottery">ทำนายฝัน</a>
+
+  <% if(!currentUser) { %>
+ <a style="float:right;"  href="/login" method = 'POST' tabindex="-1">เข้าสู่ระบบ</a>
+    <a  style="float:right;" href="/signup" method = 'POST' tabindex="-1">สมัครสมาชิก</a>
+    <% } else { %>
+      <a   style="float:right;" href="/logout" tabindex="-1">ออกจากระบบ</a>
+    <a  style="float:right;" href="/fortune/<%= currentUser._id %>/Profile" tabindex="-1">โปรไฟล์</a>
+     
+        <% } %>  
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+<div class='container' >
+  <% if (error && error.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+  <% } %>
+</div>
+  <!-- Start Page Header area -->
+	<div id="mu-page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="mu-page-header-area">
+						<h1 class="mu-page-header-title">ดูดวงไพ่ยิปซี รายเดือน</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  <!-- End Page Header area -->
+  
+  
+	<!-- Start Breadcrumb -->
+	<div id="mu-breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<nav aria-label="breadcrumb" role="navigation">
+					  <ol class="breadcrumb mu-breadcrumb">
+					   
+					  </ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+  <!-- End Breadcrumb -->
+  <section id="mu-contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mu-contact-area">
+            <!-- Title -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card card-12">
+      
+                  <div class="card-body">
+                    <p></br></p>
+<% Yipseemonth.forEach(function(yipseemonth){ %>
+  <p></br></p>
+    <h3><mark>ตำแหน่งที่ 1 ไพ่ของคุณคือ <%= yipseemonth.name1 %></mark></h3>
+    <p></br></p>
+    <img src=<%= yipseemonth.image1 %> class="img-fluid" width='200'>
+    
+    <p></br></p>
+    <p>ช่วงนี้ตัวคุณเป็นอย่างไร : <%= yipseemonth.text1 %></p>
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+    <p></br></p>
+    <h3><mark>ตำแหน่งที่ 2 ไพ่ของคุณคือ <%= yipseemonth.name2 %></mark></h3>
+    <p></br></p>
+    <img src=<%= yipseemonth.image2 %> class="img-fluid" width='200'>
+    <p></br></p>
+    <p>สถานการณ์ทั่วไป : <%= yipseemonth.text2 %></p>
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+    <p></br></p>
+    <h3><mark>ตำแหน่งที่ 3 ไพ่ของคุณคือ <%= yipseemonth.name3 %></mark></h3>
+    <p></br></p>
+    <img src=<%= yipseemonth.image3 %> class="img-fluid" width='200'>
+    <p></br></p>
+    <p>สิ่งที่ตั้งใจมุ่งหวัง : <%= yipseemonth.text3 %></p>
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+    <p></br></p>
+    <h3><mark>ตำแหน่งที่ 4 ไพ่ของคุณคือ <%= yipseemonth.name4 %></mark></h3>
+    <p></br></p>
+    <img src=<%= yipseemonth.image4 %> class="img-fluid" width='200'>
+    <p></br></p>
+    <p>อดีตที่ผ่านมา : <%= yipseemonth.text4 %></p>
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+    <p></br></p>
+
+    <h3><mark>ตำแหน่งที่ 5 ไพ่ของคุณคือ <%= yipseemonth.name5 %></mark></h3>
+    <p></br></p>
+    <img src=<%= yipseemonth.image5 %> class="img-fluid" width='200'>
+    <p></br></p>
+    <p>ความรัก : <%= yipseemonth.text5 %></p>
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+    <p></br></p>
+
+    <h3><mark>ตำแหน่งที่ 6 ไพ่ของคุณคือ <%= yipseemonth.name6 %></mark></h3>
+    <p></br></p>
+    <img src=<%= yipseemonth.image6 %> class="img-fluid" width='200'>
+    <p></br></p>
+    <p>อนาคตที่จะเกิด : <%= yipseemonth.text6 %></p>
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+    <p></br></p>
+
+    <h3><mark>ตำแหน่งที่ 7 ไพ่ของคุณคือ <%= yipseemonth.name7 %></mark></h3>
+    <p></br></p>
+    <img src=<%= yipseemonth.image7 %> class="img-fluid" width='200'>
+    <p></br></p>
+    <p>ปัญหาและแนวทางแก้ไข : <%= yipseemonth.text7 %></p>
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+    <p></br></p>
+
+    <h3><mark>ตำแหน่งที่ 8 ไพ่ของคุณคือ <%= yipseemonth.name8 %></mark></h3>
+    <p></br></p>
+    <img src=<%= yipseemonth.image8 %> class="img-fluid" width='200'>
+    <p></br></p>
+    <p>อิทธิพลรอบข้าง : <%= yipseemonth.text8 %></p>
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+    <p></br></p>
+
+    <h3><mark>ตำแหน่งที่ 9 ไพ่ของคุณคือ <%= yipseemonth.name9 %></mark></h3>
+    <p></br></p>
+    <img src=<%= yipseemonth.image9 %> class="img-fluid" width='200'>
+    <p></br></p>
+    <p>ความคิดภายในใจ : <%= yipseemonth.text9 %></p>
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+    <p></br></p>
+
+    <h3><mark>ตำแหน่งที่ 10 ไพ่ของคุณคือ <%= yipseemonth.name10 %></mark></h3>
+    <p></br></p>
+    <img src=<%= yipseemonth.image10 %> class="img-fluid" width='200'>
+    <p></br></p>
+    <p>สรุป : <%= yipseemonth.text10 %></p>
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+    <p></br></p>
+
+<% }) %>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<br>
+<br>
+<br>
+<!-- Start Breadcrumb -->
+<div id="mu-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb mu-breadcrumb">
+           
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Breadcrumb -->
+<div id="mu-page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="mu-page-header-area">
+          <div style="text-align:center;">
+            <p>ขอจบคำทำนายไพ่ยิปซีรายเดือน ไว้เบื้องต้นเพียงเท่านี้ คำทำนายอาจไม่ละเอียดเจาะจงและสั้นเพราะเรื่องราวแต่ละวันมีไม่มาก 
+              ทุกคำทำนายขอให้ท่านพิจารณา ขอให้รับคำทำนายดี ๆ เป็นกำลังใจ และระวังป้องกันความเสื่อมจากคำทำนายไม่ดีก็น่าจะเพียงพอ 
+              และ อย่าให้การทำนายทายทักนี้ เป็นนายของท่าน ที่บอกท่านจะต้องเป็นอย่างนั้น จะต้องเป็นอย่างนี้ แก้ไขไม่ได้ มีทัศนคติไม่ดี 
+              ถ้าคำทำนายที่ไม่ดีเป็นจริงก็โทษดวงชะตาในที่สุด ทุกอย่างป้องปรามผ่อนหนักเป็นเบาได้ อยู่ที่ตัวท่านเอง บุญที่ทำจะเปลี่ยนเส้นทางกรรมของท่านได้</p>
+          <p>หากคำทำนายข้างต้นนี้ล่วงเกินท่านด้วย มโนกรรม วจีกรรม กายกรรม หรืออคติใด ๆ ก็ตาม ขอท่านอโหสิกรรมให้ผู้จัดทำด้วย 
+              สุดท้ายนี้..ขอบารมีสิ่งศักดิ์สิทธิ์ทั้งหลายที่ท่านเคารพบูชา จงช่วยอำนวยอวยชัย ให้ท่านมีสติ มีปัญญา ปราศจากโรคภัยด้วยเทอญ</p>
+          
+          <p></br></p>
+      
+         
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<%- include("../partials/footer") %>

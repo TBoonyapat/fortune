@@ -1,0 +1,306 @@
+<%- include("../partials/header") %>
+<style>
+  h3 {
+    text-align: center;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  th,
+  td {
+    padding: 15px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #t01 {
+    width: 100%;
+    background-color: #f1f1c1;
+  }
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 1px;
+ /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</style>
+<div class="topnav">
+  <a class="navbar-brand mu-logo" href="/fortune"><span>TEETEE FORTUNE</span></a>
+  <a href="/fortune">หน้าหลัก</a>
+  <a href="/fortune/today">ดูดวงรายวัน</a>
+  <a href="/fortune/rasee">ดูดวงราศี</a>
+  <a href="/fortune/birthday">ดูดวงวันเกิด</a>
+  <a href="/fortune/yipseeday">ดูดวงไพ่ยิปซี</a>
+  <a href="/fortune/yipseelove">ดูดวงไพ่ยิปซีความรัก</a>
+  <a href="/fortune/yipseemonth">ดูดวงไพ่ยิปซีรายเดือน</a>
+  <a class="active" href="/fortune/lottery">ทำนายฝัน</a>
+  <% if(!currentUser) { %>
+  <div class="topnav-right">
+
+    <a href="/login" method='POST' tabindex="-1">เข้าสู่ระบบ</a>
+    <a href="/signup" method='POST' tabindex="-1">สมัครสมาชิก</a>
+    <% } else { %>
+    <!-- Welcome, you logged as <%= currentUser.username %> -->
+    <div class="topnav-right">
+
+      <a style="float:right;" href="/logout" tabindex="-1">ออกจากระบบ</a>
+      <a style="float:right;" href="/fortune/<%= currentUser._id %>/Profile" tabindex="-1">โปรไฟล์</a>
+
+      <% } %>
+    </div>
+  </div>
+  <div id="mu-page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mu-page-header-area">
+            <div style="text-align:center;">
+              <h1 class="mu-page-header-title">ทำนายฝัน<br> </h1>
+              <p>แชร์เลขเด็ดของคุณ หรืออ่านคำทนายฝันเพื่อหาเลขเด็ด เลขนำโชคของคุณในเดือนนี้</p2>
+              <p></br></p>
+
+              <a c href='/fortune/yipseeday/show'>
+                <div id="welcomeDiv" style="display:none;" class="answer_list"><button id="animated"
+                    onclick="randomlinks()" class="btn btn--pill btn--green" type="submit">ดูคำทำนาย</button></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="mu-breadcrumb">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <nav aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb mu-breadcrumb">
+
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p><br></p>
+  <p><br></p>
+  <p><br></p>
+  <p><br></p>
+  <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w780">
+        <div class="card card-5">
+           
+            <div class="card-body">
+  <h1>ทำนายฝัน และ เลขเด็ด </h1><br>
+  <% Lottery.dream.forEach(function(dream){ %>
+  <p><mark>"<%= dream.name %>"</mark></p>
+  <p><%= dream.text1 %></p>
+  <p><%= dream.text2 %></p>
+  <p><%= dream.text3 %></p>
+  <p><%= dream.text4 %></p>
+  <p><%= dream.text5 %></p>
+  <p><%= dream.text6 %></p>
+  <p><%= dream.text7 %></p>
+  <p><%= dream.text8 %></p><br><br>
+  <% }); %>
+</div>
+</div>
+</div>
+</div>
+
+  <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w780">
+        <div class="card card-15">
+            <div class="card-heading"></div>
+       
+  <form action='/fortune/lottery/<%= Lottery._id %>?_method=PUT' method="POST">
+    <p></br></p>
+    <p></br></p>
+    <h3>โหวตเลขเด็ดของคุณ</h3>
+    <p></br></p>
+    <p></br></p>
+    <h3> <label for="validationDefault04">เลขบน</label>
+      <select  name='up' id="validationDefault04" required>
+        <option selected value="no"></option>
+        <option value="zero">0</option>
+        <option value="one">1</option>
+        <option value="two">2</option>
+        <option value="three">3</option>
+        <option value="four">4</option>
+        <option value="five">5</option>
+        <option value="six">6</option>
+        <option value="seven">7</option>
+        <option value="eight">8</option>
+        <option value="nine">9</option>
+      </select> 
+      
+      <label for="validationDefault04">เลขล่าง</label>
+      <select  name='dow' id="validationDefault04" required>
+        <option selected value="no"></option>
+        <option value="zero1">0</option>
+        <option value="one1">1</option>
+        <option value="two1">2</option>
+        <option value="three1">3</option>
+        <option value="four1">4</option>
+        <option value="five1">5</option>
+        <option value="six1">6</option>
+        <option value="seven1">7</option>
+        <option value="eight1">8</option>
+        <option value="nine1">9</option>
+      </select>  <button class="btn btn--pill btn--green" type="submit">ยืนยัน</button></h3>
+     
+
+ 
+  </form>
+	                    
+</form> 
+
+</div>
+</div>
+
+</div>
+  <div class="row">
+    <div class="column" >
+      <h3><%= Lottery.nameup %></h3>
+      <br>
+      <table>
+        <tr>
+          <th>เลขเด็ด</th>
+          <th>จำนวนโหวต</th>
+        </tr>
+        <tr>
+          <tr>
+            <td>0</td>
+            <td><%= Lottery.zero %></td>
+          </tr>
+          <td>1</td>
+          <td><%= Lottery.one %></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><%= Lottery.two %></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><%= Lottery.three %></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><%= Lottery.four %></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><%= Lottery.five %></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><%= Lottery.six %></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><%= Lottery.seven %></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><%= Lottery.eight %></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><%= Lottery.nine %></td>
+        </tr>
+        
+      </table>
+    </div>
+    <div class="column" >
+      <h3><%= Lottery.namedow %></h3>
+<br>
+<table>
+  <tr>
+    <th>เลขเด็ด</th>
+    <th>จำนวนโหวต</th>
+  </tr>
+  <tr>
+    <tr>
+      <td>0</td>
+      <td><%= Lottery.zero1 %></td>
+    </tr>
+    <td>1</td>
+    <td><%= Lottery.one1 %></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><%= Lottery.two1 %></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><%= Lottery.three1 %></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td><%= Lottery.four1 %></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><%= Lottery.five1 %></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td><%= Lottery.six1 %></td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td><%= Lottery.seven1 %></td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td><%= Lottery.eight1 %></td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td><%= Lottery.nine1 %></td>
+  </tr>
+  
+</table>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <p>
+    <h3> 
+    <a href="https://khohuai.herokuapp.com/">
+    <img border="0" alt="W3Schools" src="/uploads/toy.png" >
+    </a>
+    </p>
+  </h3>
+  <br>
+  <br>
+
+  <%- include("../partials/footer") %>
+
+
+  
+  

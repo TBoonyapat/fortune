@@ -1,0 +1,55 @@
+<%- include("partials/header") %>
+<div class="topnav">
+  <a class="navbar-brand mu-logo" href="/fortune"><span>TEETEE FORTUNE</span></a>
+  <a href="/fortune">Home</a>
+  <a href="/fortune/today">ดูดวงรายวัน</a>
+  <a href="/fortune/rasee">ดูดวงราศี</a>
+  <a href="/fortune/birthday">ดูดวงวันเกิด</a>
+  <a href="/fortune/yipseeday">ดูดวงไพ่ยิปซีรายวัน</a>
+  <a href="/fortune/yipseelove">ดูดวงไพ่ยิปซีความรัก</a>
+  <a href="/fortune/yipseemonth">ดูดวงไพ่ยิปซีรายเดือน</a>
+  <a href="/fortune/lottery">ทำนายฝัน</a>
+  <% if(!currentUser) { %>
+  <div class="topnav-right">
+
+    <a class="active" href="/login" method='POST' tabindex="-1">เข้าสู่ระบบ</a>
+    <a href="/signup" method='POST' tabindex="-1">สมัครสมาชิก</a>
+    <% } else { %>
+    <!-- Welcome, you logged as <%= currentUser.username %> -->
+    <div class="topnav-right">
+      <a class="nav-item" href="/Profile/<%= currentUser._id %>" tabindex="-1">โปรไฟล์</a>
+      <a class="nav-item" href="/logout" tabindex="-1">ออกจากระบบ</a>
+      <% } %>
+    </div>
+    <div class='container'>
+      <% if (error && error.length > 0) { %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+      <% } %>
+    </div>
+
+  </div>
+  <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w780">
+      <div class="card card-3">
+        <div class="card-heading"></div>
+        <div class="card-body">
+          <form action='/login' method='POST'>
+            <h2>เข้าสู่ระบบ</h2>
+            <p></br></p>
+            <div class="input-group">
+
+              <input class="input--style-3" type="text" name='username' placeholder="Username">
+            </div>
+            <div class="input-group">
+              <input class="input--style-3" type="password" name='password' placeholder="Password">
+            </div>
+            <button class="btn btn--pill btn--green" type="submit">เข้าสู่ระบบ</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include("partials/footer") %>

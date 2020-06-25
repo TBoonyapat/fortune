@@ -1,0 +1,170 @@
+<%- include("../partials/header") %>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+<div class="topnav" id="myTopnav">
+  <a class="navbar-brand mu-logo" href="/fortune"><span>TEETEE FORTUNE</span></a>
+  <a  href="/fortune">หน้าหลัก</a>
+  <a href="/fortune/today">ดูดวงรายวัน</a>
+  <a href="/fortune/rasee">ดูดวงราศี</a>
+  <a href="/fortune/birthday">ดูดวงวันเกิด</a>
+  <a href="/fortune/yipseeday">ดูดวงไพ่ยิปซีรายวัน</a>
+  <a  class="active"  href="/fortune/yipseelove">ดูดวงไพ่ยิปซีความรัก</a>
+  <a href="/fortune/yipseemonth">ดูดวงไพ่ยิปซีรายเดือน</a>
+  
+
+  
+  <a href="/fortune/lottery">ทำนายฝัน</a>
+
+  <% if(!currentUser) { %>
+ <a style="float:right;"  href="/login" method = 'POST' tabindex="-1">เข้าสู่ระบบ</a>
+    <a  style="float:right;" href="/signup" method = 'POST' tabindex="-1">สมัครสมาชิก</a>
+    <% } else { %>
+      <a   style="float:right;" href="/logout" tabindex="-1">ออกจากระบบ</a>
+    <a  style="float:right;" href="/fortune/<%= currentUser._id %>/Profile" tabindex="-1">โปรไฟล์</a>
+     
+        <% } %>  
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+<div class='container' >
+  <% if (error && error.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+  <% } %>
+</div>
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  </script>
+  <div id="mu-page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="mu-page-header-area">
+            <div style="text-align:center;">
+            <h1 class="mu-page-header-title">ดูดวงไพ่ยิปซี ความรัก </h1>
+            <p></br></p>
+        
+            <a c href='/fortune/yipseelove/show'>  
+						<div id="welcomeDiv"   style="display:none;" class="answer_list" ><button  id="animated" onclick="randomlinks()" class="btn btn--pill btn--green" type="submit">ดูคำทำนาย</button></div></a> 
+          </div>
+          </div>
+				</div>
+			</div>
+		</div>
+	</div> 
+
+  <div id="mu-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb" role="navigation">
+                  <ol class="breadcrumb mu-breadcrumb">
+                   
+                  </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<% Yipse.sort(function() {return 0.5 - Math.random()}) %>
+
+
+<% for (let i = 0; i <= 2; i++) { %>
+
+    <% if(i == 0){ %>
+      <section id="mu-contact">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mu-contact-area">
+                <!-- Title -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card card-12">
+          
+                      <div class="card-body">
+                        <p></br></p>
+        <h3>อดีต</h3>
+        <p></br></p>
+    <% }else if(i == 1){ %>
+      <p></br></p>
+        <h3>ปัจจุบัน</h3>
+        <p></br></p>
+    <% }else{ %>
+      <p></br></p>
+        <h3>อนาคต</h3>
+        <p></br></p>
+    <% } %>
+    <p></br></p>
+   
+    <h3><mark>ไพ่ที่คุณจับได้คือ "<%= Yipse[i].name %>"</mark></h3>
+    <p></br></p>
+    <img src=<%= Yipse[i].image %> class="img-fluid" width='200'> 
+    <p></br></p>
+    <p><%= Yipse[i].datalove %></p>
+    <p></br></p>
+    
+    <p>-----------------------------------------------------------------------------------------------------------------</p>
+<% } %>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<br>
+<br>
+<!-- Start Breadcrumb -->
+<div id="mu-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb mu-breadcrumb">
+           
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Breadcrumb -->
+<div id="mu-page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="mu-page-header-area">
+          <div style="text-align:center;">
+            <p>ขอจบคำทำนายไพ่ยิปซีความรัก ไว้เบื้องต้นเพียงเท่านี้ คำทำนายอาจไม่ละเอียดเจาะจงและสั้นเพราะเรื่องราวแต่ละวันมีไม่มาก 
+              ทุกคำทำนายขอให้ท่านพิจารณา ขอให้รับคำทำนายดี ๆ เป็นกำลังใจ และระวังป้องกันความเสื่อมจากคำทำนายไม่ดีก็น่าจะเพียงพอ 
+              และ อย่าให้การทำนายทายทักนี้ เป็นนายของท่าน ที่บอกท่านจะต้องเป็นอย่างนั้น จะต้องเป็นอย่างนี้ แก้ไขไม่ได้ มีทัศนคติไม่ดี 
+              ถ้าคำทำนายที่ไม่ดีเป็นจริงก็โทษดวงชะตาในที่สุด ทุกอย่างป้องปรามผ่อนหนักเป็นเบาได้ อยู่ที่ตัวท่านเอง บุญที่ทำจะเปลี่ยนเส้นทางกรรมของท่านได้</p>
+            <p>หากคำทำนายข้างต้นนี้ล่วงเกินท่านด้วย มโนกรรม วจีกรรม กายกรรม หรืออคติใด ๆ ก็ตาม ขอท่านอโหสิกรรมให้ผู้จัดทำด้วย 
+              สุดท้ายนี้..ขอบารมีสิ่งศักดิ์สิทธิ์ทั้งหลายที่ท่านเคารพบูชา จงช่วยอำนวยอวยชัย ให้ท่านมีสติ มีปัญญา ปราศจากโรคภัยด้วยเทอญ</p>
+            
+          
+          <p></br></p>
+      
+         
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<%- include("../partials/footer") %>

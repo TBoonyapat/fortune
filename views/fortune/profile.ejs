@@ -1,0 +1,278 @@
+<%- include("../partials/header") %>
+<style>
+    .radio-label {
+   display: inline-block;
+    vertical-align: top;
+    margin-right: 3%;
+}
+.radio-input {
+   display: inline-block;
+    vertical-align: top;
+}
+.card78 {
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+max-width: 300px;
+margin: auto;
+text-align: center;
+font-family: arial;
+}
+
+.title {
+color: grey;
+font-size: 18px;
+}
+
+button {
+border: none;
+outline: 0;
+display: inline-block;
+padding: 8px;
+color: white;
+background-color: #000;
+text-align: center;
+cursor: pointer;
+width: 100%;
+font-size: 18px;
+}
+
+a {
+text-decoration: none;
+font-size: 22px;
+color: black;
+}
+
+button:hover, a:hover {
+opacity: 0.7;
+}
+</style>
+
+<link href="https://fonts.googleapis.com/css2…" rel="stylesheet">
+<div class="topnav" id="myTopnav">
+<a class="navbar-brand mu-logo" href="/fortune"><span>TEETEE FORTUNE</span></a>
+<a href="/fortune">หน้าหลัก</a>
+<a href="/fortune/today">ดูดวงรายวัน</a>
+<a href="/fortune/rasee">ดูดวงราศี</a>
+<a href="/fortune/birthday">ดูดวงวันเกิด</a>
+<div class="dropdown">
+<button class="dropbtn">ดูดวงไพ่ยิปซี
+
+</button>
+<div class="dropdown-content">
+<a href="/fortune/yipseeday">ดูดวงไพ่ยิปซีรายวัน</a>
+<a href="/fortune/yipseelove">ดูดวงไพ่ยิปซีความรัก</a>
+<a href="/fortune/yipseemonth">ดูดวงไพ่ยิปซีรายเดือน</a>
+</div>
+
+</div>
+<a href="/fortune/lottery">ทำนายฝัน</a>
+
+<% if(!currentUser) { %>
+<a style="float:right;" href="/login" method = 'POST' tabindex="-1">เข้าสู่ระบบ</a>
+<a style="float:right;" href="/signup" method = 'POST' tabindex="-1">สมัครสมาชิก</a>
+<% } else { %>
+<a style="float:right;" href="/logout" tabindex="-1">ออกจากระบบ</a>
+<a class="active" style="float:right;" href="/fortune/<%= currentUser._id %>/Profile" tabindex="-1">โปรไฟล์</a>
+
+<% } %>
+<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+<div class='container' >
+<% if (error && error.length > 0) { %>
+<div class="alert alert-danger" role="alert">
+<%= error %>
+</div>
+<% } %>
+</div>
+
+<script>
+function myFunction() {
+var x = document.getElementById("myTopnav");
+if (x.className === "topnav") {
+x.className += " responsive";
+} else {
+x.className = "topnav";
+}
+}
+</script>
+<br>
+
+<h2 style="text-align:center">สวัสดี <%= currentUser.name %></h2>
+
+<br>
+<div class="card78">
+<% moment.locale('th'); %>
+<img src=<%= '/uploads/'+ currentUser.image %> class="img-fluid">
+<p>วันเกิด : <%= moment(currentUser.birthday).format("L") %> </p>
+<p>วัน : <%= moment(currentUser.birthday).format("dddd") %> </p>
+<p>เดือน : <%= moment(currentUser.birthday).format("MMMM") %></p>
+<p>พุทธศักราช : <%= moment(currentUser.birthday).add('543','year').format("YYYY") %></p>
+<p>คริสศักราช : <%= moment(currentUser.birthday).format("YYYY") %></p>
+
+<p>เพศ : <%= currentUser.gender %> </p>
+
+</div>
+
+<div class="form-group row" style = "text-align: center;">
+<a class="btn btnt--pill btn--yellow" href='/fortune/<%= currentUser._id %>/profile/edit' data-toggle="modal" data-target="#exampleModal"><font color="black">แก้ไขโปรไฟล์</font></a>
+<a class="btn btnt--pill btn--tt" href="/" role="button" data-toggle="modal" data-target="#staticBackdrop" ><font color="black">คำทำนายที่บันทึก</font></a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 id="exampleModalLabel"></h5>
+
+</div>
+<div class="modal-body">
+<form action="/fortune/<%= currentUser._id %>/profile/<%= currentUser._id %>?_method=PUT" method="POST" enctype='multipart/form-data'>
+<div class="input-group">
+<input class="input--style-3" type="text" name="name" placeholder="ชื่อ-สุกล" value='<%= currentUser.name %>'>
+</div>
+<div class="input-group">
+<input class="input--style-3" type="date" name="birth" placeholder="วันเดือนปีเกิด" value='<%= currentUser.birthday %>'>
+<i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+</div>
+<div class="input-group">
+<div class="rs-select2 js-select-simple select--no-search">
+<select class="custom-select custom-select-sm" name='gender' value='<%= currentUser.gender %>'>
+<option selected>เพศ</option>
+<option value="ชาย">ชาย</option>
+<option value="หญิง">หญิง</option>
+<option value="อื่นๆ">อื่นๆ</option>
+</select>
+</div>
+</div>
+<label for="exampleFormControlFile1">Choose file</label>
+<div class="col-sm-10">
+<input type="file" class="form-control-file" id="exampleFormControlFile1" name='image' accept='image/*'>
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btnt--pill btn--red" data-dismiss="modal">ยกเลิก</button>
+<button class="btn btnt--pill btn--blue" type="submit">ยืนยัน</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<% User.histoday.forEach(function(his){ %>
+<div>
+<form id="delete-form" action="/fortune/<%= currentUser._id %>/profile/history/day/<%= his._id %>?_method=DELETE" method="POST">
+<a href="/fortune/<%= currentUser._id %>/profile/history/<%= his._id %>/showday" class="badge badge-info"><%= his.name1 %></a>
+<a class="badge badge-warning"><%= moment(his.Timestamp).add('543', 'year').format("DD.MMMYYYY") %></a>
+<button class="badge badge-danger" style="float: right;">ลบ</button>
+</form>
+
+<form action="/fortune/<%= currentUser._id %>/profile/history/star/<%= his._id %>/day" method="POST">
+
+<label class="radio-inline">
+    <input type="radio" name="name" value='1'> 1
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="name" value='2'> 2
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="name" value='3'> 3
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="name" value='4'>4
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="name" value='5'>5
+  </label>
+  <label class="radio-inline">
+    <button class="badge badge-warning" type="submit">ยืนยัน</button>
+  </label>    
+</form>
+</div>
+<% }) %>
+<% User.historasee.forEach(function(his){ %>
+<div>
+<form id="delete-form"
+action="/fortune/<%= currentUser._id %>/profile/history/rasee/<%= his._id %>?_method=DELETE" method="POST">
+<a href="/fortune/<%= currentUser._id %>/profile/history/<%= his._id %>/showrasee"
+class="badge badge-info"><%= his.name1 %></a>
+<a class="badge badge-warning"><%= moment(his.Timestamp).add('543', 'year').format("DD.MMMYYYY") %></a>
+<button class="badge badge-danger" style="float: right;">ลบ</button>
+</form>
+
+<form action="/fortune/<%= currentUser._id %>/profile/history/star/<%= his._id %>/rasee" method="POST">
+    <label class="radio-inline">
+        <input type="radio" name="name" value='1'> 1
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="name" value='2'> 2
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="name" value='3'> 3
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="name" value='4'>4
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="name" value='5'>5
+      </label>
+      <label class="radio-inline">
+        <button class="badge badge-warning" type="submit">ยืนยัน</button>
+      </label>    
+</form>
+</div>
+<% }) %>
+<% User.histobirthday.forEach(function(his){ %>
+<div>
+<form id="delete-form"
+action="/fortune/<%= currentUser._id %>/profile/history/birthday/<%= his._id %>?_method=DELETE"
+method="POST">
+<a href="/fortune/<%= currentUser._id %>/profile/history/<%= his._id %>/showbirthday"
+class="badge badge-info"><%= his.name1 %></a>
+<a class="badge badge-warning"><%= moment(his.Timestamp).add('543', 'year').format("DD.MMMYYYY") %></a>
+<button class="badge badge-danger" style="float: right;">ลบ</button>
+</form>
+<form action="/fortune/<%= currentUser._id %>/profile/history/star/<%= his._id %>/birthday" method="POST">          
+    <label class="radio-inline">
+        <input type="radio" name="name" value='1'> 1
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="name" value='2'> 2
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="name" value='3'> 3
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="name" value='4'>4
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="name" value='5'>5
+      </label>     
+      <label class="radio-inline">
+        <button class="badge badge-warning" type="submit">ยืนยัน</button>
+      </label>          
+      
+  
+</form>
+</div>
+<% }) %>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btnt--pill btn--red" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+
+<%- include("../partials/footer") %>

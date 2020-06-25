@@ -1,0 +1,73 @@
+<%- include("partials/header") %>
+<div class="topnav">
+  <a class="navbar-brand mu-logo" href="/fortune"><span>TEETEE FORTUNE</span></a>
+  <a  href="/fortune">Home</a>
+  <a href="/fortune/today">ดูดวงรายวัน</a>
+  <a href="/fortune/rasee">ดูดวงราศี</a>
+  <a href="/fortune/birthday">ดูดวงวันเกิด</a>
+  <a href="/fortune/yipseeday">ดูดวงไพ่ยิปซีรายวัน</a>
+  <a href="/fortune/yipseelove">ดูดวงไพ่ยิปซีความรัก</a>
+  <a href="/fortune/yipseemonth">ดูดวงไพ่ยิปซีรายเดือน</a>
+  <a href="/fortune/lottery">ทำนายฝัน</a>
+  <% if(!currentUser) { %>
+  <div class="topnav-right">
+    
+    <a  href="/login" method = 'POST' tabindex="-1">เข้าสู่ระบบ</a>
+    <a  class="active"  href="/signup" method = 'POST' tabindex="-1">สมัครสมาชิก</a>
+    <% } else { %>
+      <!-- Welcome, you logged as <%= currentUser.username %> -->
+      <div class="topnav-right">
+      <a class="nav-item" href="/Profile/<%= currentUser._id %>" tabindex="-1">โปรไฟล์</a>
+      <a class="nav-item" href="/logout" tabindex="-1">ออกจากระบบ</a>
+    <% } %>  
+  </div>
+</div>
+
+	<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w780">
+        <div class="card card-4">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <form action = '/signup' method = 'POST' enctype='multipart/form-data'>
+                    <h2>สมัครสมาชิก</h2>
+                    <p></br></p>
+                    <div class="input-group">
+                      <input class="input--style-3" type="text" name="name" placeholder="ชื่อ-สกุล">
+                  </div>
+                  <div class="input-group">
+                      <input class="input--style-3" type="text" name="username" placeholder="email">
+                  </div>
+                    <div class="input-group">
+                        <input class="input--style-3 js-datepicker" type="date" name="birthday" placeholder="วันเดือนปีเกิด">
+                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                    </div>
+                    <div class="input-group">
+                        <div class="rs-select2 js-select-simple select--no-search">
+                            <select class="custom-select custom-select-sm" name='gender'>
+                                <option selected>เพศ</option>
+                                <option value="ชาย">ชาย</option>
+                                <option value="หญิง">หญิง</option>
+                                <option value="อื่นๆ">อื่นๆ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input class="input--style-3" type="password" name="password" placeholder="รหัสผ่าน">
+                    </div>
+                    <div class="input-group">
+                      
+                        <div class="col-sm-14">
+                            <input type="file" class="input--style-3" id="exampleFormControlFile1" name='image' accept='image/*'>
+                        </div>
+                    </div>
+                    <div class="p-t-10">
+                        <button class="btn btn--pill btn--green" type="submit">สมัครสมาชิก</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include("partials/footer") %>

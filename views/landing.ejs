@@ -1,0 +1,80 @@
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+<div class="topnav" id="myTopnav">
+  <a class="navbar-brand mu-logo" href="/fortune"><span>TEETEE FORTUNE</span></a>
+  <a class="active" href="/fortune">หน้าหลัก</a>
+  <a href="/fortune/today">ดูดวงรายวัน</a>
+  <a href="/fortune/rasee">ดูดวงราศี</a>
+  <a href="/fortune/birthday">ดูดวงวันเกิด</a>
+  <div class="dropdown">
+    <button class="dropbtn">ดูดวงไพ่ยิปซี 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+     		<a href="/fortune/yipseeday">ดูดวงไพ่ยิปซีรายวัน</a>
+		<a href="/fortune/yipseelove">ดูดวงไพ่ยิปซีความรัก</a>
+		<a href="/fortune/yipseemonth">ดูดวงไพ่ยิปซีรายเดือน</a>
+    </div>
+
+  </div> 
+  <a href="/fortune/lottery">ทำนายฝัน</a>
+
+  <% if(!currentUser) { %>
+ <a style="float:right;"  href="/login" method = 'POST' tabindex="-1">เข้าสู่ระบบ</a>
+    <a  style="float:right;" href="/signup" method = 'POST' tabindex="-1">สมัครสมาชิก</a>
+    <% } else { %>
+      <a   style="float:right;" href="/logout" tabindex="-1">ออกจากระบบ</a>
+    <a  style="float:right;" href="/fortune/<%= currentUser._id %>/Profile" tabindex="-1">โปรไฟล์</a>
+     
+        <% } %>  
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+<div class='container' >
+  <% if (error && error.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+  <% } %>
+</div>
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  </script>
+ 
+
+
+
+<div class="w3-content w3-section" >
+	<img class="mySlides" src="/uploads/slider-img-1.jpg" >
+	<img class="mySlides" src="/uploads/slider-img-2.jpg" >
+	<img class="mySlides" src="/uploads/slider-img-3.jpg" >
+  </div>
+
+
+
+	
+	<script>
+		var myIndex = 0;
+		carousel();
+		
+		function carousel() {
+		  var i;
+		  var x = document.getElementsByClassName("mySlides");
+		  for (i = 0; i < x.length; i++) {
+			x[i].style.display = "none";  
+		  }
+		  myIndex++;
+		  if (myIndex > x.length) {myIndex = 1}    
+		  x[myIndex-1].style.display = "block";  
+		  setTimeout(carousel, 5000); 
+		}
+		</script>
+
+
+<%- include("partials/footer") %>
