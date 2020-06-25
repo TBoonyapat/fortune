@@ -65,5 +65,5 @@ app.use('/fortune/:id/profile',profileRoutes);
 //     console.log('TeeTeeFortune has started!');
 // });
 app.listen(port, () => {
-  console.log(`Server is ready on port :${ PORT }`);
+  console.log(`Server is ready on port :${ port }`);
 });
